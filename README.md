@@ -1,5 +1,8 @@
-# imageFX-api
-Unofficial reverse engineered api for imageFX service provided by labs.google
+# imageFX-api-modified
+This project is forked from [rohitaryal/imageFX-api](https://github.com/rohitaryal/imageFX-api)
+
+I created & modified `generate_from_file.py` to add the ability to generate images from prompts in the text file `prompts.txt`.  
+Original project is licensed under MIT.
 
 <center>
     <img src="./misc/banner.png" style="border-radius:10px" height="300px">
@@ -17,6 +20,26 @@ Whisk API client can be found [here](https://github.com/rohitaryal/whisk-api)
 npm i -g @rohitaryal/imagefx-api
 ```
 ## Usage
+
+<details>
+<summary>From "prompts.txt" [My modification]</summary>
+
+I've created a `generate_from_file.py` script that will automatically generate images based on the "prompts" in `prompts.txt` file.
+
+Usage:
+1. Edit the `prompts.txt` file to have as many prompts as you want. Each prompt is seperated by an empty line. See example in `prompts.txt`
+2. Run the script `[Replace "your_auth_token" with the token from your browser. See HELP section on how to get token]`
+```bash
+$env:TOKEN="your_auth_token"; node .\generate_from_file.mjs .\prompts.txt --count=4 --out=./out
+```
+- `./out` can be modified to have a specific output folder for image generation
+- `count` can be modified to have any amount of images generated per prompt
+3. Running the default args will create an output folder called `out` that has all the images generated in it. Naming scheme of images are numbers in ascending order
+- In the case that a prompt has failed to generate, it will continue generating the next prompt, but skip the naming of the files and continue as if they were generated for easier detection of failed generation.
+- EX: If 3 prompts are written and each generates 2 images, and the 2nd prompt fails, naming scheme will be `1,2,5,6`
+- After generation is complete, there will be a `manifest.txt` file also created in the folder the show the prompts, corresponding image #, and wether the image was created successfully or there is a `GAP`
+    
+</details>
 
 <details>
 <summary>Command Line</summary>
